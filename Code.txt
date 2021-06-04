@@ -1,0 +1,18 @@
+function crunchify_custom_logo_url ( $crunchify_logo_html ) {
+ 
+	$crunchify_custom_logo_id = get_theme_mod( 'custom_logo' );
+ 
+	// Make sure to replace your updated site URL
+	$crunchify_new_url = 'https://handysends.co';
+ 
+	$crunchify_logo_html = sprintf( '<a href="%1$s" class="custom-logo-link" rel="home" itemprop="url">%2$s</a>',
+		esc_url( $crunchify_new_url ),
+		wp_get_attachment_image( $crunchify_custom_logo_id, 'full', false, array(
+			'class'    => 'custom-logo',
+		) )
+	);
+	return $crunchify_logo_html;
+}
+ 
+// get_custom_logo: Returns a custom logo, linked to home unless the theme supports removing the link on the home page.
+add_filter( 'get_custom_logo',  'crunchify_custom_logo_url' );
